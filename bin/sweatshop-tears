@@ -10,6 +10,14 @@ program :help, 'Author', 'Justin Scott <jvscott@gmail.com>'
 
 default_command :help
 
+command :init do |c|
+  c.syntax = 'sweatshop-tears init'
+  c.description = 'Makes the Tears packages available to Robot Sweatshop'
+  c.action do |args, options|
+    p 'Initialized'
+  end
+end
+
 # command :job do |c|
 #   c.syntax = 'sweatshop job <name>'
 #   c.description = 'Creates and edits jobs.'
