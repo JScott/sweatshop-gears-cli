@@ -1,0 +1,6 @@
+*.gem
+jobs/*.yaml
+
+.bundle
+vendor
+coverage
