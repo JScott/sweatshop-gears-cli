@@ -1,5 +1,5 @@
 Gem::Specification.new do |gem|
-  gem.name        = 'sweatshop-tears'
+  gem.name        = 'robot_sweatshop-tears'
   gem.version     = '0.0.1'
   gem.licenses    = 'MIT'
   gem.authors     = ['Justin Scott']
