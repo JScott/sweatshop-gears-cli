@@ -1,19 +1,22 @@
 require 'teststrap'
-require 'robot_sweatshop/tears'
 
-context 'the CLI tool' do
+context 'sweatshop-tears' do
   setup { File.expand_path "#{__dir__}/../bin/sweatshop-tears" }
-  context 'with no arguments' do
+  context '' do
     setup { `#{topic}` }
-    asserts('doing something') { not topic.empty? }
+    denies_topic('the output').empty
   end
-  context 'with init' do
-    setup { `#{topic} init` }
-    asserts('doing something') { not topic.empty? }
+
+  context 'init' do
+    setup do
+      #
+      `#{topic} init`
+    end
+    denies_topic('the output').empty
+    asserts('packages are downloaded') { Dir.exist? Tears.download_path }
   end
 end
 
-# init
 # remove
 # list
 # show

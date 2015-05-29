@@ -5,8 +5,8 @@ Gem::Specification.new do |gem|
   gem.authors     = ['Justin Scott']
   gem.email       = 'jvscott@gmail.com'
   gem.homepage    = 'http://www.github.com/jscott/sweatshop-tears-cli/'
-  gem.summary     = 'Robot Sweatshop'
-  gem.description = 'Package management for Robot Sweatshop'
+  gem.summary     = 'Package management for Robot Sweatshop'
+  gem.description = gem.summary
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- test/**/*`.split("\n")
@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'commander'
   gem.add_runtime_dependency 'robot_sweatshop'
   gem.add_runtime_dependency 'contracts'
+  gem.add_runtime_dependency 'cli-announce'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'riot'
