@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 require 'yaml'
 require 'commander/import'
-require 'robot_sweatshop/config'
+require_relative '../lib/robot_sweatshop/tears'
+# require 'robot_sweatshop/tears'
 
 program :name, 'Sweatshop Tears'
 program :version, '0.0.1'
@@ -13,8 +14,10 @@ default_command :help
 command :init do |c|
   c.syntax = 'sweatshop-tears init'
   c.description = 'Makes the Tears packages available to Robot Sweatshop'
+  c.option '--path', 'The working path for downloading packages'
   c.action do |args, options|
-    p 'Initialized'
+    options.default :path => '/opt/tears'
+    Tears.download options.path
   end
 end
 
