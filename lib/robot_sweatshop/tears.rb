@@ -9,25 +9,20 @@ module Tears
   #     repo = Git.open download_path
   #     puts repo.pull
 
-  Contract None => Git::Base
-  def self.clone_packages
-    Git.clone git_repo, 'sweatshop-tears-packages', path: download_path
+  Contract String => Git::Base
+  def self.clone_packages_to(path)
+    Git.clone git_repo, 'sweatshop-tears-packages', path: File.expand_path(path)
   end
 
   Contract String => Maybe[Git::Base]
-  def self.download(path=download_path)
+  def self.download(path)
     return nil if Dir.exist? path
     Announce.info "Downloading packages from #{git_repo}"
-    clone_packages
+    clone_packages_to path
   end
 
   Contract None => String
   def self.git_repo
     'git@github.com:JScott/sweatshop-tears-packages.git'
-  end
-
-  Contract None => String
-  def self.download_path
-    '/opt/tears'
   end
 end

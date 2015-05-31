@@ -14,7 +14,7 @@ default_command :help
 command :init do |c|
   c.syntax = 'sweatshop-tears init'
   c.description = 'Makes the Tears packages available to Robot Sweatshop'
-  c.option '--path', 'The working path for downloading packages'
+  c.option '--path STRING', String, 'The working path for downloading packages'
   c.action do |args, options|
     options.default :path => '/opt/tears'
     Tears.download options.path
