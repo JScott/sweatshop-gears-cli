@@ -7,7 +7,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.warnings = true
+  # config.warnings = true
   config.disable_monkey_patching!
   config.order = :random
   Kernel.srand config.seed

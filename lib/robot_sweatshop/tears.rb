@@ -11,12 +11,12 @@ module Tears
 
   Contract String => Git::Base
   def self.clone_packages_to(path)
-    Git.clone git_repo, 'sweatshop-tears-packages', path: File.expand_path(path)
+    raise "#{path} already exists." if Dir.exist? path
+    Git.clone git_repo, File.basename(path), path: File.dirname(path)
   end
 
   Contract String => Maybe[Git::Base]
   def self.download(path)
-    return nil if Dir.exist? path
     Announce.info "Downloading packages from #{git_repo}"
     clone_packages_to path
   end
