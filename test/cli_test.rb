@@ -1,19 +1,22 @@
 require 'teststrap'
 
-SCRIPT_PATH = File.expand_path "#{__dir__}/../bin/sweatshop-tears"
+TEARS_BIN = File.expand_path "#{__dir__}/../bin/sweatshop-tears"
 PACKAGE_PATH = File.expand_path '.test_download_path'
 
 context 'sweatshop-tears' do
   setup { File.expand_path "#{__dir__}/../bin/sweatshop-tears" }
   context '' do
-    setup { `#{SCRIPT_PATH}` }
+    setup { `#{TEARS_BIN}` }
     denies_topic('the output').empty
   end
   context 'init' do
-    setup { `#{SCRIPT_PATH} init --path #{PACKAGE_PATH}` }
+    setup { `#{TEARS_BIN} init --path #{PACKAGE_PATH}` }
     denies_topic('the output').empty
-    asserts('packages are downloaded') { Dir.exist? PACKAGE_PATH }
+    asserts('the packages repository is cloned') { File.exist? "#{PACKAGE_PATH}/README.md" }
     teardown { FileUtils.rm_rf PACKAGE_PATH }
+  end
+  context 'remove' do
+    setup { `#{TEARS_BIN} remove` }
   end
 end
 
