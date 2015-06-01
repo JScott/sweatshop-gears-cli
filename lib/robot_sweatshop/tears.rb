@@ -13,7 +13,7 @@ module Tears
 
   Contract Hash => Maybe[Git::Base]
   def self.download(to_path:)
-    Announce.info "Downloading packages from '#{git_repo}'"
+    puts "Downloading packages from '#{git_repo}'"
     clone_packages to_path
     Announce.success 'Packages downloaded'
   end
@@ -25,7 +25,7 @@ module Tears
 
   Contract Hash => Any
   def self.expose_binaries(from_path:)
-    Announce.info "Linking '#{from_path}' to '#{configatron.scripts_path}'"
+    puts "Linking '#{from_path}' to '#{configatron.scripts_path}'"
     scripts(from_path).each { |script| expose script }
   end
 
@@ -34,8 +34,12 @@ module Tears
     binary_name = File.basename path
     original_binary = "#{path}/#{binary_name}"
     binary_link = "#{configatron.scripts_path}/#{binary_name}"
-    FileUtils.symlink original_binary, binary_link
-    Announce.success "Symlinked #{binary_name}"
+    begin
+      FileUtils.symlink original_binary, binary_link
+      Announce.success "Symlinked #{binary_name}"
+    rescue
+      Announce.warning "#{binary_name} already exists"
+    end
   end
 
   Contract String => ArrayOf[String]
