@@ -4,3 +4,5 @@ jobs/*.yaml
 .bundle
 vendor
 coverage
+
+.robot_sweatshop

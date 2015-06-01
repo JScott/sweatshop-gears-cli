@@ -1,6 +1,8 @@
 require 'teststrap'
 require 'robot_sweatshop/config'
 
+# TODO: would serverspec be more appropriate for testing CLI tools?
+
 TEARS_BIN = File.expand_path "#{__dir__}/../bin/sweatshop-tears"
 PACKAGES_PATH = File.expand_path '.test_download_path'
 SWEATSHOP_SCRIPTS_PATH = File.expand_path configatron.scripts_path

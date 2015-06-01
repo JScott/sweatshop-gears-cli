@@ -6,9 +6,6 @@ require 'robot_sweatshop/config'
 module Tears
   include Contracts
 
-  #     repo = Git.open download_path
-  #     puts repo.pull
-
   Contract String => Git::Base
   def self.clone_packages(path)
     Git.clone git_repo, File.basename(path), path: File.dirname(path)
@@ -21,15 +18,29 @@ module Tears
     Announce.success 'Packages downloaded'
   end
 
-  Contract String => Any
-  def self.expose_scripts!(from_path:)
-    Announce.info "Linking '#{from_path}' to '#{configatron.scripts_path}'"
-    # binaries.each do |binary| { create_link_to binary }
-    # services.each do |service| { load_into_eye service }
-  end
-
   Contract None => String
   def self.git_repo
-    'git@github.com:JScott/sweatshop-tears-packages.git'
+    'https://github.com/JScott/sweatshop-tears-packages.git'
+  end
+
+  Contract Hash => Any
+  def self.expose_binaries(from_path:)
+    Announce.info "Linking '#{from_path}' to '#{configatron.scripts_path}'"
+    scripts(from_path).each { |script| expose script }
+  end
+
+  Contract String => nil
+  def self.expose(path)
+    binary_name = File.basename path
+    original_binary = "#{path}/#{binary_name}"
+    binary_link = "#{configatron.scripts_path}/#{binary_name}"
+    FileUtils.symlink original_binary, binary_link
+    Announce.success "Symlinked #{binary_name}"
+  end
+
+  Contract String => ArrayOf[String]
+  def self.scripts(path)
+    paths = Dir["#{path}/*"].select { |path| File.directory? path }
+    paths.map { |path| File.expand_path path }
   end
 end
