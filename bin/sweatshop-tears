@@ -17,7 +17,8 @@ command :init do |c|
   c.option '--path STRING', String, 'The working path for downloading packages'
   c.action do |args, options|
     options.default :path => '/opt/tears'
-    Tears.download options.path
+    Tears.download to_path: options.path
+    # Tears.expose_scripts! from_path: options.path
   end
 end
 

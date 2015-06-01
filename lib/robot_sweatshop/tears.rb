@@ -10,15 +10,22 @@ module Tears
   #     puts repo.pull
 
   Contract String => Git::Base
-  def self.clone_packages_to(path)
-    raise "#{path} already exists." if Dir.exist? path
+  def self.clone_packages(path)
     Git.clone git_repo, File.basename(path), path: File.dirname(path)
   end
 
-  Contract String => Maybe[Git::Base]
-  def self.download(path)
-    Announce.info "Downloading packages from #{git_repo}"
-    clone_packages_to path
+  Contract Hash => Maybe[Git::Base]
+  def self.download(to_path:)
+    Announce.info "Downloading packages from '#{git_repo}'"
+    clone_packages to_path
+    Announce.success 'Packages downloaded'
+  end
+
+  Contract String => Any
+  def self.expose_scripts!(from_path:)
+    Announce.info "Linking '#{from_path}' to '#{configatron.scripts_path}'"
+    # binaries.each do |binary| { create_link_to binary }
+    # services.each do |service| { load_into_eye service }
   end
 
   Contract None => String
