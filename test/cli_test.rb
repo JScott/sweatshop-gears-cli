@@ -3,18 +3,18 @@ require 'robot_sweatshop/config'
 
 # TODO: would serverspec be more appropriate for testing CLI tools?
 
-TEARS_BIN = File.expand_path "#{__dir__}/../bin/sweatshop-tears"
+GEARS_BIN = File.expand_path "#{__dir__}/../bin/sweatshop-gears"
 PACKAGES_PATH = File.expand_path '.test_download_path'
 SWEATSHOP_SCRIPTS_PATH = File.expand_path configatron.scripts_path
 
-context 'sweatshop-tears' do
-  setup { File.expand_path "#{__dir__}/../bin/sweatshop-tears" }
+context 'sweatshop-gears' do
+  setup { File.expand_path "#{__dir__}/../bin/sweatshop-gears" }
   context '' do
-    setup { `#{TEARS_BIN}` }
+    setup { `#{GEARS_BIN}` }
     denies_topic('the output').empty
   end
   context 'init' do
-    setup { `#{TEARS_BIN} init --path #{PACKAGES_PATH}` }
+    setup { `#{GEARS_BIN} init --path #{PACKAGES_PATH}` }
     denies_topic('the output').empty
     asserts('the packages repository is cloned') { File.exist? "#{PACKAGES_PATH}/README.md" }
     asserts('the binaries are available to Sweatshop workers') { File.exist? "#{SWEATSHOP_SCRIPTS_PATH}/git-sync" }

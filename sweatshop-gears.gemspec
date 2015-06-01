@@ -1,10 +1,10 @@
 Gem::Specification.new do |gem|
-  gem.name        = 'robot_sweatshop-tears'
+  gem.name        = 'robot_sweatshop-gears'
   gem.version     = '0.0.1'
   gem.licenses    = 'MIT'
   gem.authors     = ['Justin Scott']
   gem.email       = 'jvscott@gmail.com'
-  gem.homepage    = 'http://www.github.com/jscott/sweatshop-tears-cli/'
+  gem.homepage    = 'http://www.github.com/jscott/sweatshop-gears-cli/'
   gem.summary     = 'Package management for Robot Sweatshop'
   gem.description = gem.summary
 

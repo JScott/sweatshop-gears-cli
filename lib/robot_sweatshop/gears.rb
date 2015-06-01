@@ -3,7 +3,7 @@ require 'git'
 require 'terminal-announce'
 require 'robot_sweatshop/config'
 
-module Tears
+module Gears
   include Contracts
 
   Contract String => Git::Base
@@ -20,7 +20,7 @@ module Tears
 
   Contract None => String
   def self.git_repo
-    'https://github.com/JScott/sweatshop-tears-packages.git'
+    'https://github.com/JScott/sweatshop-gears-packages.git'
   end
 
   Contract Hash => Any
