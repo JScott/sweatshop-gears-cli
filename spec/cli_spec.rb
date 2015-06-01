@@ -9,9 +9,9 @@ RSpec.describe 'sweatshop-tears' do
     it { is_expected.to_not be_empty }
   end
   context 'init' do
-    subject { a = `#{SCRIPT_PATH} init --path #{PACKAGE_PATH}`; p Dir[PACKAGE_PATH]; a }
-    after(:all) { FileUtils.rm_rf PACKAGE_PATH; p Dir[PACKAGE_PATH] }
+    subject { a = `#{SCRIPT_PATH} init --path #{PACKAGE_PATH}`; p 333; a }
+    after(:all) { FileUtils.rm_rf PACKAGE_PATH; p 3444 }
     it { is_expected.to_not be_empty }
-    it { expect(Dir).to exist(PACKAGE_PATH) }
+    it { expect { Dir }.to include(PACKAGE_PATH) }
   end
 end
