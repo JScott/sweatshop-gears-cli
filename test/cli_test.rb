@@ -15,12 +15,8 @@ context 'sweatshop-tears' do
     asserts('the packages repository is cloned') { File.exist? "#{PACKAGES_PATH}/README.md" }
     teardown { FileUtils.rm_rf PACKAGES_PATH }
   end
-  context 'update' do
-    setup { `#{TEARS_BIN} update --path #{PACKAGES_PATH}` }
-    denies_topic('the output').empty
-    asserts_topic.includes { "up-to-date" }
-  end
 end
 
 # list
 # show
+# update
