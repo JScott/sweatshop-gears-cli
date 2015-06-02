@@ -1,6 +1,7 @@
 require 'rake'
 
 task :test do
+  $stdout.sync = true
   puts "sweatshop-gears"
   IO.popen "bats #{__dir__}/test --pretty" do |file|
     until file.eof?

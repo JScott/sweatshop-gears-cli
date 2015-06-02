@@ -18,6 +18,7 @@ command :init do |c|
   c.action do |args, options|
     options.default :path => '/opt/gears'
     Gears.download to_path: options.path
+    Gears.install_dependencies from_path: options.path
     Gears.expose_binaries from_path: options.path
   end
 end
