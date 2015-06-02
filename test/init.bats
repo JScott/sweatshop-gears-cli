@@ -19,7 +19,7 @@
 
 @test "Loads services into Eye" {
   run sweatshop-gears init --path .test_download_path
-  [ $(eye info) =~ big-green-button ]
+  [[ $(eye info) =~ big-green-button ]]
 }
 
 @test "Installs dependencies" {
