@@ -6,8 +6,5 @@ Package management for [Robot Sweatshop](https://github.com/JScott/robot_sweatsh
 
 ## Future
 
-- Metadata (binary or service, author, description)
-- Services that aren't exposed but loaded into Eye
-- Dependencies (Gemfiles, etc)
-- Gears package dependencies
+- More metadata (author, description)
 - Source from custom repo
