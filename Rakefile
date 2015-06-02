@@ -1,16 +1,10 @@
-require 'bundler/setup'
 require 'rake'
-require 'rake/testtask'
-require 'simplecov'
 
 task :test do
-  SimpleCov.start do
-    add_filter "/test/"
-  end
-  Rake::TestTask.new do |t|
-    t.libs << "test"
-    t.pattern = "test/**/*_test.rb"
-    t.verbose = false
+  IO.popen "bats #{__dir__}/test --pretty" do |file|
+    until file.eof?
+      puts file.gets
+    end
   end
 end
 
