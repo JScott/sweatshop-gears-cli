@@ -17,7 +17,6 @@
   [ ! -f $scripts_path/big-green-button ]
 }
 
-
 @test "Installs dependencies" {
   yes | gem uninstall erubis --all
   run sweatshop-gears init --path .test_download_path

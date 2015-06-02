@@ -1,12 +1,19 @@
 require 'fileutils'
 require 'terminal-announce'
+require 'yaml'
 require 'robot_sweatshop/config'
 
 module Gears
   module Binaries
     def self.expose(from_path:)
-      puts "Linking '#{from_path}' to '#{configatron.scripts_path}'"
-      Gears.packages(from_path).each { |package| link package }
+      Gears.packages(from_path).each do |package|
+        link package if contains_binary? package
+      end
+    end
+
+    def self.contains_binary?(path)
+      metadata = YAML.load "#{path}/metadata.yaml"
+      metadata['type'] == 'binary'
     end
 
     def self.link(package_path)
