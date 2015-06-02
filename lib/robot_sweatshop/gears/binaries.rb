@@ -12,7 +12,7 @@ module Gears
     end
 
     def self.contains_binary?(path)
-      metadata = YAML.load "#{path}/metadata.yaml"
+      metadata = YAML.load File.read("#{path}/metadata.yaml")
       metadata['type'] == 'binary'
     end
 
