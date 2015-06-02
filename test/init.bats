@@ -11,6 +11,13 @@
   [ -f $scripts_path/git-sync ]
 }
 
+@test "Doesn't expose services" {
+  run sweatshop-gears init --path .test_download_path
+  scripts_path=.robot_sweatshop/scripts
+  [ ! -f $scripts_path/big-green-button ]
+}
+
+
 @test "Installs dependencies" {
   yes | gem uninstall erubis --all
   run sweatshop-gears init --path .test_download_path
