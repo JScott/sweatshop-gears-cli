@@ -1,10 +1,11 @@
 PATH
   remote: .
   specs:
-    robot_sweatshop-tears (0.0.1)
+    robot_sweatshop-gears (0.0.1)
       bundler
       commander
       contracts
+      erubis
       git
       robot_sweatshop
       terminal-announce
@@ -24,6 +25,7 @@ GEM
     contracts (0.9)
     daybreak (0.3.0)
     docile (1.1.5)
+    erubis (2.7.0)
     exponential-backoff (0.0.2)
     eye (0.6.4)
       celluloid (~> 0.15.0)
@@ -46,7 +48,7 @@ GEM
     json (1.8.2)
     moneta (0.8.0)
     nio4r (1.1.0)
-    oj (2.12.8)
+    oj (2.12.9)
     rack (1.6.1)
     rack-protection (1.5.3)
       rack
@@ -102,5 +104,5 @@ PLATFORMS
 DEPENDENCIES
   rake
   riot
-  robot_sweatshop-tears!
+  robot_sweatshop-gears!
   simplecov

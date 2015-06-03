@@ -23,7 +23,7 @@
 }
 
 @test "Installs dependencies" {
-  yes | gem uninstall erubis --all
+  yes | gem uninstall erubis --all --ignore-dependencies
   run sweatshop-gears init --path .test_download_path
   [[ $(gem list) =~ erubis ]]
 }

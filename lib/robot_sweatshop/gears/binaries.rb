@@ -1,7 +1,5 @@
 require 'fileutils'
 require 'terminal-announce'
-require 'yaml'
-require 'robot_sweatshop/config'
 
 module Gears
   module Binaries
@@ -11,21 +9,28 @@ module Gears
       end
     end
 
-    def self.contains_binary?(path)
-      metadata = YAML.load File.read("#{path}/metadata.yaml")
+    def self.contains_binary?(package_path)
+      metadata = Gears.metadata package_path
       metadata['type'] == 'binary'
     end
 
     def self.link(package_path)
       binary_name = File.basename package_path
       original_binary = "#{package_path}/#{binary_name}"
-      binary_link = "#{configatron.scripts_path}/#{binary_name}"
+      binary_link = "#{scripts_path}/#{binary_name}"
       begin
         FileUtils.symlink original_binary, binary_link
         Announce.success "Symlinked #{binary_name}"
       rescue
         Announce.warning "#{binary_name} already exists"
       end
+    end
+
+    def self.scripts_path
+      sweatshop_config = '/tmp/.robot_sweatshop-eye-config.yaml'
+      Announce.failure 'Please run `sweatshop start` again' unless File.exists? sweatshop_config
+      config = YAML.load File.read(sweatshop_config)
+      config[:scripts_path]
     end
   end
 end

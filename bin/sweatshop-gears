@@ -20,6 +20,7 @@ command :init do |c|
     Gears.download to_path: options.path
     Gears::Dependencies.install from_path: options.path
     Gears::Binaries.expose from_path: options.path
+    Gears::Services.load from_path: options.path
   end
 end
 

@@ -1,4 +1,5 @@
 require 'git'
+require 'yaml'
 
 module Gears
   def self.clone_packages(path)
@@ -18,5 +19,9 @@ module Gears
   def self.packages(path)
     paths = Dir["#{path}/*"].select { |path| File.directory? path }
     paths.map { |path| File.expand_path path }
+  end
+
+  def self.metadata(path)
+    YAML.load File.read("#{path}/metadata.yaml")
   end
 end
