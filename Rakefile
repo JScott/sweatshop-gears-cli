@@ -1,6 +1,7 @@
 require 'rake'
 
 task :test do
+  `sweatshop start`
   $stdout.sync = true
   puts "sweatshop-gears"
   IO.popen "bats #{__dir__}/test --pretty" do |file|
@@ -8,6 +9,7 @@ task :test do
       puts file.gets
     end
   end
+  `sweatshop stop`
 end
 
 task :build do
