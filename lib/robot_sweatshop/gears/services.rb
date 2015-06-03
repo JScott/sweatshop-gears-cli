@@ -8,6 +8,7 @@ module Gears
       packages = Gears.packages(from_path).select { |package| contains_service? package }
       services = packages.map { |package| File.basename package }
       dynamically_load_eye services, from_path
+      services.each { |service| Announce.success "Loaded #{service} into Eye" }
     end
 
     def self.contains_service?(package_path)
