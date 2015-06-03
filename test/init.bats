@@ -30,5 +30,4 @@
 
 teardown() {
   rm -rf .test_download_path
-  rm -rf .robot_sweatshop
 }
