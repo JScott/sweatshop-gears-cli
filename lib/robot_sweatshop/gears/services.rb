@@ -3,6 +3,7 @@ require 'terminal-announce'
 require 'erubis'
 
 module Gears
+  # Installs service Gears packages
   module Services
     def self.load(from_path:)
       packages = Gears.packages(from_path).select { |package| contains_service? package }

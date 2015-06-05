@@ -2,6 +2,7 @@ require 'fileutils'
 require 'terminal-announce'
 
 module Gears
+  # Installs binary Gears packages
   module Binaries
     def self.expose(from_path:)
       Gears.packages(from_path).each do |package|
@@ -28,7 +29,7 @@ module Gears
 
     def self.scripts_path
       sweatshop_config = '/tmp/.robot_sweatshop-eye-config.yaml'
-      Announce.failure 'Please run `sweatshop start` again' unless File.exists? sweatshop_config
+      Announce.failure 'Please run `sweatshop start` again' unless File.exist? sweatshop_config
       config = YAML.load File.read(sweatshop_config)
       config[:scripts_path]
     end

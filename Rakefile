@@ -3,10 +3,10 @@ require 'rake'
 task :test do
   `sweatshop stop`
   $stdout.sync = true
-  puts "sweatshop-gears"
-  IO.popen "bats #{__dir__}/test --pretty" do |file|
-    until file.eof?
-      puts file.gets
+  puts 'sweatshop-gears'
+  IO.popen "bats #{__dir__}/test --pretty" do |io_stream|
+    while line = io_stream.gets
+      puts line
     end
   end
 end
@@ -19,5 +19,5 @@ task :build do
   puts 'Done.'
 end
 
-task :default => :test
-task :test => :build
+task default: :test
+task test: :build

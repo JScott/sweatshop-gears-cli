@@ -1,6 +1,7 @@
 require 'git'
 require 'yaml'
 
+# Provides information and downloading of Gears packages
 module Gears
   def self.clone_packages(path)
     Git.clone git_repo, File.basename(path), path: File.dirname(path)
@@ -16,12 +17,12 @@ module Gears
     Announce.success 'Packages downloaded'
   end
 
-  def self.packages(path)
-    paths = Dir["#{path}/*"].select { |path| File.directory? path }
+  def self.packages(gears_path)
+    paths = Dir["#{gears_path}/*"].select { |path| File.directory? path }
     paths.map { |path| File.expand_path path }
   end
 
-  def self.metadata(path)
-    YAML.load File.read("#{path}/metadata.yaml")
+  def self.metadata(package_path)
+    YAML.load File.read("#{package_path}/metadata.yaml")
   end
 end

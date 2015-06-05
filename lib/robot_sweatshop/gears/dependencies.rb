@@ -2,6 +2,7 @@ require 'terminal-announce'
 require 'bundler/cli'
 
 module Gears
+  # Deals with the dependencies from Gears packages
   module Dependencies
     def self.install(from_path:)
       Gears.packages(from_path).each { |path| install_gems path }

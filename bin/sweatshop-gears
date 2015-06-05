@@ -14,8 +14,8 @@ command :init do |c|
   c.syntax = 'sweatshop-gears init'
   c.description = 'Makes the Gears packages available to Robot Sweatshop'
   c.option '--path STRING', String, 'The working path for downloading packages'
-  c.action do |args, options|
-    options.default :path => '/opt/gears'
+  c.action do |_args, options|
+    options.default path: '/opt/gears'
     Gears.download to_path: options.path
     Gears::Dependencies.install from_path: options.path
     Gears::Binaries.expose from_path: options.path
