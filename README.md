@@ -8,3 +8,4 @@ Package management for [Robot Sweatshop](https://github.com/JScott/robot_sweatsh
 
 - More metadata (author, description)
 - Source from custom repo
+- Maybe not depend on Robot Sweatshop to generate gears directories?
