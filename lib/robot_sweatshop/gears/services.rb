@@ -16,12 +16,19 @@ module Gears
       metadata['type'] == 'service'
     end
 
+    def self.write_and_load(eye_config)
+      eye_file = '/tmp/.sweatshop_gears.eye'
+      File.write eye_file, eye_config
+      puts `eye load #{eye_file}`
+      puts `eye stop sweatshop_gears`
+      File.delete eye_file
+    end
+
     def self.dynamically_load_eye(service_list, gears_path)
       input = File.read "#{__dir__}/sweatshop_gears.eye.eruby"
       eruby = Erubis::Eruby.new input
-      eye_file = '/tmp/.sweatshop_gears.eye'
-      File.write eye_file, eruby.result(services: service_list, gears_path: File.expand_path(gears_path))
-      puts `eye load #{eye_file}`
+      context = { services: service_list, gears_path: File.expand_path(gears_path) }
+      write_and_load eruby.result(context)
     end
   end
 end
