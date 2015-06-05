@@ -13,9 +13,9 @@ end
 
 task :build do
   print 'Building and installing local gem..'
-  `gem build sweatshop-gears.gemspec --force`
+  `gem build sweatshop_gears.gemspec --force`
   print '.'
-  `gem install robot_sweatshop-gears-*.gem`
+  `gem install sweatshop_gears-*.gem`
   puts 'Done.'
 end
 
