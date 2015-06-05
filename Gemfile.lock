@@ -106,3 +106,6 @@ DEPENDENCIES
   riot
   robot_sweatshop-gears!
   simplecov
+
+BUNDLED WITH
+   1.10.2

@@ -18,14 +18,18 @@
 }
 
 @test "Loads services into Eye" {
+  eye stop big-green-button
   run sweatshop-gears init --path .test_download_path
-  [[ $(eye info) =~ big-green-button ]]
+  eye start big-green-button
+  sleep 3
+  [[ $(eye info | grep big-green-button) =~ up ]]
 }
 
 @test "Installs dependencies" {
-  yes | gem uninstall erubis --all --ignore-dependencies
-  run sweatshop-gears init --path .test_download_path
-  [[ $(gem list) =~ erubis ]]
+  skip "I need a gem to be installed that isn't used by Sweatshop or Gears"
+  yes | gem uninstall SOME_GEM --all
+  sweatshop-gears init --path .test_download_path
+  [[ $(gem list) =~ "SOME_GEM " ]]
 }
 
 teardown() {
