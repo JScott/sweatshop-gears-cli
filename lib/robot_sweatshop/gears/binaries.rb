@@ -28,9 +28,9 @@ module Gears
     end
 
     def self.scripts_path
-      sweatshop_config = '/tmp/.robot_sweatshop-eye-config.yaml'
-      Announce.failure 'Please run `sweatshop start` again' unless File.exist? sweatshop_config
-      config = YAML.load File.read(sweatshop_config)
+      config = File.expand_path '~/.robot_sweatshop/compiled_config.yaml'
+      Announce.failure 'Please run `sweatshop start` again' unless File.exist? config
+      config = YAML.load File.read(config)
       config[:scripts_path]
     end
   end
