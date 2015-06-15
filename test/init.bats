@@ -5,6 +5,11 @@
   [ -f .test_download_path/README.md ]
 }
 
+@test "Doesn't download any packages" {
+  run sweatshop-gears init --path .test_download_path
+  [ ! -f .test_download_path/packages/big-green-button/README.md ]
+}
+
 teardown() {
   rm -rf .test_download_path
 }
