@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    robot_sweatshop-gears (0.0.1)
+    sweatshop_gears (1.0.1)
       bundler
       commander
       contracts
@@ -104,8 +104,8 @@ PLATFORMS
 DEPENDENCIES
   rake
   riot
-  robot_sweatshop-gears!
   simplecov
+  sweatshop_gears!
 
 BUNDLED WITH
    1.10.2

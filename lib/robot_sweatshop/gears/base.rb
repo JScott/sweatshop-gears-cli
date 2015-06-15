@@ -25,4 +25,11 @@ module Gears
   def self.metadata(package_path)
     YAML.load File.read("#{package_path}/metadata.yaml")
   end
+
+  def self.create_runtime_paths
+    config_path = File.expand_path '~/.robot_sweatshop/compiled_config.yaml'
+    config = YAML.load_file config_path
+    FileUtils.mkpath config[:logfile_path]
+    FileUtils.mkpath config[:pidfile_path]
+  end
 end
