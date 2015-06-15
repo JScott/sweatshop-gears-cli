@@ -7,5 +7,4 @@ Package management for [Robot Sweatshop](https://github.com/JScott/robot_sweatsh
 ## Future
 
 - Figure out something sane for finding ports for services
-- More metadata (author, description)
 - Source from custom repo
