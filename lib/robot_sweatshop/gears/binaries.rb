@@ -5,17 +5,10 @@ module Gears
   # Installs binary Gears packages
   module Binaries
     def self.expose(from_path:)
-      Gears.packages(from_path).each do |package|
-        link package if contains_binary? package
-      end
+      link_binary from_path
     end
 
-    def self.contains_binary?(package_path)
-      metadata = Gears.metadata package_path
-      metadata['type'] == 'binary'
-    end
-
-    def self.link(package_path)
+    def self.link_binary(package_path)
       binary_name = File.basename package_path
       original_binary = "#{package_path}/#{binary_name}"
       binary_link = "#{scripts_path}/#{binary_name}"

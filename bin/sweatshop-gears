@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'bundler/setup'
 require 'yaml'
 require 'commander/import'
 require 'robot_sweatshop/gears'
@@ -12,14 +13,24 @@ default_command :help
 
 command :init do |c|
   c.syntax = 'sweatshop-gears init'
-  c.description = 'Makes the Gears packages available to Robot Sweatshop'
+  c.description = 'Downloads the Sweatshop Gears metadata'
   c.option '--path STRING', String, 'The working path for downloading packages'
   c.action do |_args, options|
-    options.default path: '/opt/gears'
-    Gears.download to_path: options.path
-    Gears.create_runtime_paths
-    Gears::Dependencies.install from_path: options.path
-    Gears::Binaries.expose from_path: options.path
-    Gears::Services.load from_path: options.path
+    options.default path: '/usr/local/gears'
+    # TODO: what if that path doesn't exist yet at all?
+    Gears::Metadata.download to_path: options.path
+    Gears::Metadata.create_runtime_paths # TODO: ensure robot_sweatshop ran and the compiled config exists?
+  end
+end
+
+command :install do |c|
+  c.syntax = 'sweatshop-gears install <package-name>'
+  c.description = 'Makes a Gears package available to Robot Sweatshop'
+  c.option '--path STRING', String, 'The working path for downloading packages'
+  c.action do |args, options|
+    options.default path: '/usr/local/gears'
+    system "sweatshop-gears init --path #{options.path}" unless Dir.exist? options.path
+    fail "#{args.first} already installed" if Dir.exist? "#{options.path}/packages/#{args.first}"
+    Gears::Packages.install args.first, from_path: options.path
   end
 end
