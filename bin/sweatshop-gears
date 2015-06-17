@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'yaml'
+require 'fileutils'
 require 'commander/import'
 require 'robot_sweatshop/gears'
 
@@ -16,7 +17,7 @@ command :init do |c|
   c.option '--path STRING', String, 'The working path for downloading packages'
   c.action do |_args, options|
     options.default path: '/usr/local/gears'
-    # TODO: what if that path doesn't exist yet at all?
+    FileUtils.mkpath options.path
     Gears::Metadata.download to_path: options.path
     Gears::Metadata.create_runtime_paths # TODO: ensure robot_sweatshop ran and the compiled config exists? Only errors in Services
   end
@@ -29,7 +30,7 @@ command :install do |c|
   c.action do |args, options|
     options.default path: '/usr/local/gears'
     system "sweatshop-gears init --path #{options.path}" unless Dir.exist? options.path
-    fail "#{args.first} already installed" if Dir.exist? "#{options.path}/packages/#{args.first}"
+    fail "#{args.first} already installed" if Dir.exist? "#{options.path}/#{args.first}"
     Gears::Packages.install args.first, from_path: options.path
   end
 end

@@ -13,7 +13,7 @@ module Gears
     end
 
     def self.data_for(package_name, path)
-      install_path = "#{path}/packages/#{package_name}"
+      install_path = "#{path}/#{package_name}"
       metadata_path = "#{path}/#{package_name}.yaml"
       fail "Metadata for '#{package_name}' not found" unless File.exist? metadata_path
       [install_path, YAML.load_file(metadata_path)]
@@ -28,7 +28,7 @@ module Gears
       Gears::Services.load from_path: install_path if metadata['type'] == 'service'
     rescue
       Announce.failure 'Error occurred, rolling back installation'
-      FileUtils.rm_rf "#{from_path}/packages/#{package_name}"
+      FileUtils.rm_rf "#{from_path}/#{package_name}"
     end
   end
 end

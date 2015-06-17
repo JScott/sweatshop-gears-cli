@@ -2,7 +2,9 @@
 
 Package management for [Robot Sweatshop](https://github.com/JScott/robot_sweatshop) scripts.
 
-`sweatshop gears <package-name>`
+`sweatshop gears install <package-name>`
+
+If you can't create `/usr/local/gears`, use the `--path` flag to install everything to somewhere you can.
 
 ## Future
 

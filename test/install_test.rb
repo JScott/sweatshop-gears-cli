@@ -8,7 +8,7 @@ context 'sweatshop-gears install' do
     end
   end
   denies_topic('the output').empty
-  asserts('packages are downloaded') { File.exist? "#{PACKAGES_PATH}/packages/git-sync" }
+  asserts('packages are downloaded') { File.exist? "#{PACKAGES_PATH}/git-sync" }
   asserts('binaries are symlinked') { File.exist? "#{SWEATSHOP_SCRIPTS_PATH}/git-sync" }
   denies('services are symlinked') { File.exist? "#{SWEATSHOP_SCRIPTS_PATH}/big-green-button" }
   asserts('services are loaded into Eye') { not `eye info | grep big-green-button`.empty? }
