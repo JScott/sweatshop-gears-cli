@@ -7,7 +7,7 @@ require 'robot_sweatshop/config'
 `sweatshop stop`
 
 PACKAGES_PATH = '.test_download_path'
-SWEATSHOP_SCRIPTS_PATH = File.expand_path '.robot_sweatshop/scripts'
+SWEATSHOP_SCRIPTS_PATH = '.robot_sweatshop/scripts'
 
 def clean_up_paths
   FileUtils.rm_rf PACKAGES_PATH
