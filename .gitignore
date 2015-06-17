@@ -6,4 +6,4 @@ vendor
 coverage
 
 .robot_sweatshop
-.test
+.test_download_path
