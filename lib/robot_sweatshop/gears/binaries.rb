@@ -6,8 +6,8 @@ module Gears
   module Binaries
     def self.expose(from_path:)
       binary_name = File.basename from_path
-      original_binary = "#{from_path}/#{binary_name}"
-      binary_link = "#{scripts_path}/#{binary_name}"
+      original_binary = File.expand_path "#{from_path}/#{binary_name}"
+      binary_link = File.expand_path "#{scripts_path}/#{binary_name}"
       begin
         FileUtils.symlink original_binary, binary_link
         Announce.success "Symlinked #{binary_name}"
