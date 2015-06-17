@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require 'bundler/setup'
 require 'yaml'
 require 'commander/import'
 require 'robot_sweatshop/gears'
@@ -19,7 +18,7 @@ command :init do |c|
     options.default path: '/usr/local/gears'
     # TODO: what if that path doesn't exist yet at all?
     Gears::Metadata.download to_path: options.path
-    Gears::Metadata.create_runtime_paths # TODO: ensure robot_sweatshop ran and the compiled config exists?
+    Gears::Metadata.create_runtime_paths # TODO: ensure robot_sweatshop ran and the compiled config exists? Only errors in Services
   end
 end
 

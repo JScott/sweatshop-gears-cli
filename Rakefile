@@ -1,6 +1,7 @@
 require 'rake'
+require 'rake/testtask'
 
-task :test do
+task :bats do
   `sweatshop stop`
   $stdout.sync = true
   puts 'sweatshop-gears'
@@ -8,6 +9,12 @@ task :test do
     while line = io_stream.gets
       puts line
     end
+  end
+end
+
+task :riot do
+  Dir.glob('test/*_test.rb').each do |path|
+    require_relative path
   end
 end
 
@@ -20,4 +27,4 @@ task :build do
 end
 
 task default: :test
-task test: :build
+task test: [:build, :riot]
