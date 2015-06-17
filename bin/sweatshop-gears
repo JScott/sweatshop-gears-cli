@@ -5,7 +5,7 @@ require 'commander/import'
 require 'robot_sweatshop/gears'
 
 program :name, 'Sweatshop Gears'
-program :version, '1.0.2'
+program :version, '1.0.3'
 program :description, 'Package management for Robot Sweatshop'
 program :help, 'Author', 'Justin Scott <jvscott@gmail.com>'
 
