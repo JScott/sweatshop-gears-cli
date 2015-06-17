@@ -1,3 +1,5 @@
+require 'terminal-announce'
+
 # Provides information and downloading of Gears packages
 module Gears
   module Packages
@@ -24,6 +26,9 @@ module Gears
       Gears::Dependencies.install from_path: install_path
       Gears::Binaries.expose from_path: install_path if metadata['type'] == 'binary'
       Gears::Services.load from_path: install_path if metadata['type'] == 'service'
+    rescue
+      Announce.failure 'Error occurred, rolling back installation'
+      FileUtils.rm_rf "#{from_path}/packages/#{package_name}"
     end
   end
 end
