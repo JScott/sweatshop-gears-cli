@@ -36,7 +36,6 @@ module Gears
       fail "#{package_name} not found" unless File.exist? metadata_path
       metadata = YAML.load_file metadata_path
       Gears::Package.install_from metadata
-      # Gears::Dependencies
     end
   end
 end

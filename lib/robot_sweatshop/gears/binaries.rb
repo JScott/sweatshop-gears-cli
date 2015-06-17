@@ -5,12 +5,8 @@ module Gears
   # Installs binary Gears packages
   module Binaries
     def self.expose(from_path:)
-      link_binary from_path
-    end
-
-    def self.link_binary(package_path)
-      binary_name = File.basename package_path
-      original_binary = "#{package_path}/#{binary_name}"
+      binary_name = File.basename from_path
+      original_binary = "#{from_path}/#{binary_name}"
       binary_link = "#{scripts_path}/#{binary_name}"
       begin
         FileUtils.symlink original_binary, binary_link
@@ -22,7 +18,7 @@ module Gears
 
     def self.scripts_path
       config = File.expand_path '~/.robot_sweatshop/compiled_config.yaml'
-      Announce.failure 'Please run `sweatshop start` again' unless File.exist? config
+      fail 'Please run `sweatshop start` again' unless File.exist? config
       config = YAML.load File.read(config)
       config[:scripts_path]
     end
