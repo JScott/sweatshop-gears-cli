@@ -14,7 +14,6 @@ module Gears
     def self.write_and_load(eye_config)
       eye_file = '/tmp/.sweatshop_gears.eye'
       File.write eye_file, eye_config
-      puts eye_config
       puts `eye load #{eye_file}`
       puts `eye stop sweatshop_gears`
       File.delete eye_file
