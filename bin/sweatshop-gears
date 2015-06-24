@@ -19,7 +19,7 @@ command :init do |c|
     options.default path: '/usr/local/gears'
     FileUtils.mkpath options.path
     Gears::Metadata.download to_path: options.path
-    Gears::Services.create_paths # TODO: ensure robot_sweatshop ran and the compiled config exists? Only errors in Services
+    Gears::Services.create_paths
   end
 end
 
