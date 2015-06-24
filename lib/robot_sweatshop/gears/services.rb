@@ -29,12 +29,10 @@ module Gears
     end
 
     def self.dynamically_load_eye(install_path)
-      services_list = services_installed_to parent_path_of(install_path)
       context = {
-        services: services_list,
+        services: services_installed_to(parent_path_of(install_path)),
         install_path: File.expand_path(install_path)
       }
-      p context
       input = File.read "#{__dir__}/sweatshop_gears.eye.eruby"
       eruby = Erubis::Eruby.new input
       write_and_load eruby.result(context)

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sweatshop_gears (1.0.3)
+    sweatshop_gears (1.0.4)
       bundler
       commander
       contracts
