@@ -1,17 +1,6 @@
 require 'rake'
 require 'rake/testtask'
 
-task :bats do
-  `sweatshop stop`
-  $stdout.sync = true
-  puts 'sweatshop-gears'
-  IO.popen "bats #{__dir__}/test --pretty" do |io_stream|
-    while line = io_stream.gets
-      puts line
-    end
-  end
-end
-
 task :riot do
   Dir.glob('test/*_test.rb').each do |path|
     require_relative path

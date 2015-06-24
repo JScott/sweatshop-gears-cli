@@ -4,7 +4,6 @@ context 'sweatshop-gears install' do
   setup do
     clean_up_paths
     %w(git-sync big-green-button reporter).each do |package|
-      # puts
       `sweatshop-gears install #{package} --path #{PACKAGES_PATH}`
     end
   end
