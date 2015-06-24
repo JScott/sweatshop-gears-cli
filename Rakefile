@@ -1,3 +1,4 @@
+require 'terminal-announce'
 require 'rake'
 require 'rake/testtask'
 
@@ -8,12 +9,10 @@ task :riot do
 end
 
 task :build do
-  print 'Building and installing local gem..'
-  `rm -rf sweatshop_gears-*.gem`
-  `gem build sweatshop_gears.gemspec --force`
-  print '.'
-  `gem install sweatshop_gears-*.gem`
-  puts 'Done.'
+  Announce.info 'Building and installing local gem...'
+  puts `rm -rf sweatshop_gears-*.gem`
+  puts `gem build sweatshop_gears.gemspec --force`
+  puts `gem install sweatshop_gears-*.gem`
 end
 
 task default: :test
