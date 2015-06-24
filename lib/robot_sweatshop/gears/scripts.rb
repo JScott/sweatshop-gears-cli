@@ -17,10 +17,7 @@ module Gears
     end
 
     def self.scripts_path
-      config = File.expand_path '~/.robot_sweatshop/compiled_config.yaml'
-      fail 'Please run `sweatshop start` again' unless File.exist? config
-      config = YAML.load File.read(config)
-      config[:scripts_path]
+      Gears::Metadata.sweatshop_config[:scripts_path]
     end
   end
 end

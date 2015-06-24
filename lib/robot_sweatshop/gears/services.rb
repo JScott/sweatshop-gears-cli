@@ -30,12 +30,19 @@ module Gears
 
     def self.dynamically_load_eye(install_path)
       context = {
+        config: Gears::Metadata.sweatshop_config,
         services: services_installed_to(parent_path_of(install_path)),
         install_path: File.expand_path(install_path)
       }
       input = File.read "#{__dir__}/sweatshop_gears.eye.eruby"
       eruby = Erubis::Eruby.new input
       write_and_load eruby.result(context)
+    end
+
+    def self.create_paths
+      config = Gears::Metadata.sweatshop_config
+      FileUtils.mkpath "#{config[:logfile_path]}/gears"
+      FileUtils.mkpath "#{config[:pidfile_path]}/gears"
     end
   end
 end

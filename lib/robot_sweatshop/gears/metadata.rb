@@ -24,11 +24,10 @@ module Gears
       YAML.load File.read("#{package_path}/metadata.yaml")
     end
 
-    def self.create_runtime_paths
-      config_path = File.expand_path '~/.robot_sweatshop/compiled_config.yaml'
-      config = YAML.load_file config_path
-      FileUtils.mkpath "#{config[:logfile_path]}/gears"
-      FileUtils.mkpath "#{config[:pidfile_path]}/gears"
+    def self.sweatshop_config
+      path = File.expand_path '~/.robot_sweatshop/compiled_config.yaml'
+      fail 'Please run `sweatshop start` first' unless File.exist? path
+      YAML.load File.read(path)
     end
   end
 end

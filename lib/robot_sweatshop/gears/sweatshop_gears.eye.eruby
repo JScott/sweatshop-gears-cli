@@ -1,8 +1,4 @@
-require 'yaml'
-
-# TODO: config not guaranteed to be there. sweatshop has to run first
-CONFIG_PATH = File.expand_path '~/.robot_sweatshop/compiled_config.yaml'
-CONFIG = YAML.load_file CONFIG_PATH
+CONFIG = <%= config %>
 PID_PATH = CONFIG[:pidfile_path]
 LOG_PATH = CONFIG[:logfile_path]
 
