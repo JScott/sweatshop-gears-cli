@@ -27,15 +27,8 @@ module Gears
     def self.create_runtime_paths
       config_path = File.expand_path '~/.robot_sweatshop/compiled_config.yaml'
       config = YAML.load_file config_path
-      FileUtils.mkpath config[:logfile_path]
-      FileUtils.mkpath config[:pidfile_path]
+      FileUtils.mkpath "#{config[:logfile_path]}/gears"
+      FileUtils.mkpath "#{config[:pidfile_path]}/gears"
     end
-
-    # def self.download_and_install(package_name, from_path:)
-    #   metadata_path = "#{from_path}/#{package_name}.yaml"
-    #   fail "#{package_name} not found" unless File.exist? metadata_path
-    #   metadata = YAML.load_file metadata_path
-    #   Gears::Package.install_from metadata
-    # end
   end
 end

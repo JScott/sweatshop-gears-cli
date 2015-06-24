@@ -15,10 +15,12 @@ Eye.application :sweatshop_gears do
   check :cpu, every: 10.seconds, below: 100, times: 3
   working_dir CONFIG[:working_path]
 
+  <% for service in services %>
   process :'<%= service %>' do
     pid_file "#{PID_PATH}/gears/<%= service %>.pid"
     stdall "#{LOG_PATH}/gears/<%= service %>.log"
-    start_command "<%= gears_path %>/<%= service %>"
+    start_command "<%= install_path %>/<%= service %>"
     daemonize true
   end
+  <% end %>
 end
