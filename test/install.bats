@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-@test "Exposes package binaries" {
+@test "Exposes package scripts" {
   run sweatshop-gears install git-sync --path .test_download_path
   scripts_path=.robot_sweatshop/scripts
   [ -f $scripts_path/git-sync ]

@@ -3,7 +3,7 @@ require 'terminal-announce'
 require 'erubis'
 
 module Gears
-  # Installs service Gears packages
+  # Installs Gears service packages
   module Services
     def self.load(from_path:)
       service = File.basename from_path

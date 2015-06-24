@@ -1,5 +1,5 @@
 require_relative 'gears/metadata'
 require_relative 'gears/packages'
 require_relative 'gears/dependencies'
-require_relative 'gears/binaries'
+require_relative 'gears/scripts'
 require_relative 'gears/services'

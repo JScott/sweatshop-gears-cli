@@ -24,7 +24,7 @@ module Gears
       clone metadata['repo'], to_path: install_path
       Announce.success "#{package_name} downloaded"
       Gears::Dependencies.install from_path: install_path
-      Gears::Binaries.expose from_path: install_path if metadata['type'] == 'binary'
+      Gears::Scripts.expose from_path: install_path if metadata['type'] == 'script'
       Gears::Services.load from_path: install_path if metadata['type'] == 'service'
     rescue
       Announce.failure 'Error occurred, rolling back installation'

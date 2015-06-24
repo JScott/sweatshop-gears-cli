@@ -31,11 +31,11 @@ module Gears
       FileUtils.mkpath config[:pidfile_path]
     end
 
-    def self.download_and_install(package_name, from_path:)
-      metadata_path = "#{from_path}/#{package_name}.yaml"
-      fail "#{package_name} not found" unless File.exist? metadata_path
-      metadata = YAML.load_file metadata_path
-      Gears::Package.install_from metadata
-    end
+    # def self.download_and_install(package_name, from_path:)
+    #   metadata_path = "#{from_path}/#{package_name}.yaml"
+    #   fail "#{package_name} not found" unless File.exist? metadata_path
+    #   metadata = YAML.load_file metadata_path
+    #   Gears::Package.install_from metadata
+    # end
   end
 end
