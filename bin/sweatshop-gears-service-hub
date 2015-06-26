@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 require 'robot_sweatshop/config'
+require 'sweatshop_gears/service_hub'
 require 'sinatra'
+require 'sinatra/servicehub'
 require 'erubis'
 
 configure do
@@ -9,9 +11,7 @@ configure do
 end
 
 get '/' do
-  html = File.read "#{__dir__}/index.html"
-  eruby = Erubis::Eruby.new html
-  jobs = `sweatshop job-list`.split "\n"
-  context = {jobs: jobs}
+  eruby = Erubis::Eruby.new frontpage_template
+  context = {}
   return eruby.result(context)
 end
