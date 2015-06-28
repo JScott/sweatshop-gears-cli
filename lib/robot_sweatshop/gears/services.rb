@@ -32,13 +32,18 @@ module Gears
       "#{__dir__}/../../../bin/sweatshop-gears-service-hub"
     end
 
+    def self.first_port
+      34871
+    end
+
     def self.dynamically_load_eye(install_path)
       services_path = parent_path_of install_path
       context = {
         config: Gears::Metadata.sweatshop_config,
         services: installed_in(services_path),
         services_path: File.expand_path(services_path),
-        service_hub_bin: File.expand_path(service_hub_path)
+        service_hub_bin: File.expand_path(service_hub_path),
+        first_port: first_port
       }
       input = File.read "#{__dir__}/templates/sweatshop_gears.eye.eruby"
       eruby = Erubis::Eruby.new input

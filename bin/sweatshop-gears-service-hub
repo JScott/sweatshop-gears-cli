@@ -9,9 +9,9 @@ STDOUT.sync = true
 helpers Gears::ServiceHub
 
 configure do
-  set :port, 34871
+  set :port, ARGV[0]
   set :bind, configatron.http_bind
-  set :services_path, ARGV[0] || '/usr/local/gears/services'
+  set :services_path, ARGV[1] || '/usr/local/gears/services'
 end
 
 get '/' do
