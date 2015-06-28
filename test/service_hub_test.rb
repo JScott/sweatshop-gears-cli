@@ -14,4 +14,8 @@ context 'sweatshop-gears-hub' do
     denies_topic.empty
     asserts_topic.matches { /href="\/reporter"/ }
   end
+  context 'a service route' do
+    setup { HTTP.get('http://localhost:34871/reporter').to_s }
+    denies_topic.matches { /404/ }
+  end
 end
