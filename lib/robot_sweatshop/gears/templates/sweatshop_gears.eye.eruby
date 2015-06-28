@@ -11,10 +11,17 @@ Eye.application :sweatshop_gears do
   check :cpu, every: 10.seconds, below: 100, times: 3
   working_dir CONFIG[:working_path]
 
+  process :service_proxy do
+    pid_file "#{PID_PATH}/gears/service_proxy.pid"
+    stdall "#{LOG_PATH}/gears/service_proxy.log"
+    start_command "rackup -p <%= first_port %> <%= proxy_file %>"
+    daemonize true
+  end
+
   process :service_hub do
     pid_file "#{PID_PATH}/gears/service_hub.pid"
     stdall "#{LOG_PATH}/gears/service_hub.log"
-    start_command "<%= service_hub_bin %> <%= first_port %> '<%= services_path %>'"
+    start_command "<%= service_hub_bin %> <%= first_port+1 %> '<%= services_path %>'"
     daemonize true
   end
 
@@ -23,7 +30,7 @@ Eye.application :sweatshop_gears do
     process :'<%= service %>' do
       pid_file "#{PID_PATH}/gears/<%= service %>.pid"
       stdall "#{LOG_PATH}/gears/<%= service %>.log"
-      start_command "<%= services_path %>/<%= service %>/<%= service %> <%= first_port+1+index %>"
+      start_command "<%= services_path %>/<%= service %>/<%= service %> <%= first_port+2+index %>"
       daemonize true
     end
     <% end %>
