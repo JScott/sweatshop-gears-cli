@@ -16,7 +16,7 @@ module Gears
       File.write eye_file, eye_config
       puts `eye load #{eye_file}`
       puts `eye stop sweatshop_gears:services`
-      # File.delete eye_file
+      File.delete eye_file
     end
 
     def self.services_installed_to(install_path)
