@@ -38,7 +38,8 @@ module Gears
       Gears::Dependencies.install from_path: install_path
       expose plural_type, from_path: install_path
       Announce.success "#{package_name} installed"
-    rescue
+    rescue => error
+      puts error
       Announce.failure 'Error occurred, rolling back installation'
       FileUtils.rm_rf install_path
     end
