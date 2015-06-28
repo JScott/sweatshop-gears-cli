@@ -19,9 +19,9 @@ module Gears
       File.delete eye_file
     end
 
-    def self.services_installed_to(install_path)
-      paths = Dir["#{install_path}/*"].select { |path| File.directory? path }
-      paths.map { |path| File.basename path }
+    def self.installed_in(path)
+      services = Dir.glob("#{path}/*").select { |path| File.directory? path }
+      services.map { |path| File.basename path }
     end
 
     def self.parent_path_of(install_path)
@@ -33,10 +33,11 @@ module Gears
     end
 
     def self.dynamically_load_eye(install_path)
+      services_path = parent_path_of install_path
       context = {
         config: Gears::Metadata.sweatshop_config,
-        services: services_installed_to(parent_path_of(install_path)),
-        install_path: File.expand_path(install_path),
+        services: installed_in(services_path),
+        services_path: File.expand_path(services_path),
         service_hub_bin: File.expand_path(service_hub_path)
       }
       input = File.read "#{__dir__}/sweatshop_gears.eye.eruby"

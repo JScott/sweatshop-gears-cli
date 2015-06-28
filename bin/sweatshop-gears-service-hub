@@ -2,17 +2,21 @@
 require 'erubis'
 require 'robot_sweatshop/config'
 require 'robot_sweatshop/gears/service_hub'
+require 'robot_sweatshop/gears/services'
 require 'sinatra'
 
 helpers Gears::ServiceHub
 
 configure do
-  set :port, ARGV[0] || 34871
+  set :port, 34871
   set :bind, configatron.http_bind
+  set :services_path, ARGV[0] || '/usr/local/gears/services'
 end
 
 get '/' do
+  services = Gears::Services.installed_in "#{settings.services_path}"
+  p services
   eruby = Erubis::Eruby.new frontpage_template
-  context = {}
-  return eruby.result(context)
+  context = {services: services}
+  eruby.result context
 end
