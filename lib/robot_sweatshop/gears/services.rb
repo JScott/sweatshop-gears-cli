@@ -6,16 +6,11 @@ module Gears
   # Installs Gears service packages
   module Services
     def self.expose(from_path:)
+      services_path = File.expand_path "#{from_path}/.."
+      generate_reverse_proxy for_services: installed_in(services_path)
+      dynamically_load_eye_from services_path
       service = File.basename from_path
-      generate_reverse_proxy from_path
-      dynamically_load_eye from_path
-      remove_temporary_files
       Announce.success "Loaded #{service} into Eye"
-    end
-
-    def self.remove_temporary_files
-      File.delete eye_file
-      File.delete proxy_file
     end
 
     def self.write_and_load(eye_config)
@@ -27,10 +22,6 @@ module Gears
     def self.installed_in(path)
       services = Dir.glob("#{path}/*").select { |path| File.directory? path }
       services.map { |path| File.basename path }
-    end
-
-    def self.parent_path_of(install_path)
-      File.expand_path "#{install_path}/.."
     end
 
     def self.eye_file
@@ -49,10 +40,9 @@ module Gears
       34871
     end
 
-    def self.generate_reverse_proxy(install_path)
-      services_path = parent_path_of install_path
+    def self.generate_reverse_proxy(for_services:)
       context = {
-        services: installed_in(services_path),
+        services: for_services,
         first_port: first_port
       }
       input = File.read "#{__dir__}/templates/proxy_config.ru.eruby"
@@ -60,8 +50,7 @@ module Gears
       File.write proxy_file, eruby.result(context)
     end
 
-    def self.dynamically_load_eye(install_path)
-      services_path = parent_path_of install_path
+    def self.dynamically_load_eye_from(services_path)
       context = {
         config: Gears::Metadata.sweatshop_config,
         services: installed_in(services_path),
