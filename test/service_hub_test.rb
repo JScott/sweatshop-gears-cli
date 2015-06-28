@@ -6,6 +6,7 @@ context 'sweatshop-gears-hub' do
     clean_up_paths
     `sweatshop-gears install reporter --path #{PACKAGES_PATH}`
     `eye start reporter`
+    sleep 1
   end
   asserts('it is running') { `eye info | grep --extended-regexp 'service_hub'`.lines.count == 1 }
   # asserts('services load into the port range') { ??? }
@@ -16,6 +17,6 @@ context 'sweatshop-gears-hub' do
   end
   context 'a service route' do
     setup { HTTP.get('http://localhost:34871/reporter').to_s }
-    denies_topic.matches { /404/ }
+    denies_topic.empty
   end
 end

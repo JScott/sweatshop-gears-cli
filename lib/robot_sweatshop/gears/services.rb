@@ -17,6 +17,8 @@ module Gears
       File.write eye_file, eye_config
       puts `eye load #{eye_file}`
       puts `eye stop sweatshop_gears:services`
+      puts `eye restart sweatshop_gears:service_hub`
+      puts `eye restart sweatshop_gears:service_proxy`
     end
 
     def self.installed_in(path)
