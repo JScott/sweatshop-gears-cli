@@ -1,10 +1,10 @@
 require 'rack/reverse_proxy'
 
 use Rack::ReverseProxy do
-  reverse_proxy /^\/$/, 'http://localhost:<%= first_port+1 %>'
-  <%= services.each_with_index do |service, index| %>
-  reverse_proxy /^\/<%= service %>\/?(.*)$/, 'http://localhost:<%= first_port+2+index %>/$1'
-  <%= %>
+  reverse_proxy /^\/$/, 'http://0.0.0.0:<%= first_port+1 %>'
+  <% services.each_with_index do |service, index| %>
+  reverse_proxy /^\/<%= service %>\/?(.*)$/, 'http://0.0.0.0:<%= first_port+2+index %>/$1'
+  <% end %>
 end
 
 app = proc do |env|

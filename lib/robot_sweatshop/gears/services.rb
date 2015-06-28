@@ -9,14 +9,19 @@ module Gears
       service = File.basename from_path
       generate_reverse_proxy from_path
       dynamically_load_eye from_path
+      remove_temporary_files
       Announce.success "Loaded #{service} into Eye"
+    end
+
+    def self.remove_temporary_files
+      File.delete eye_file
+      File.delete proxy_file
     end
 
     def self.write_and_load(eye_config)
       File.write eye_file, eye_config
       puts `eye load #{eye_file}`
       puts `eye stop sweatshop_gears:services`
-      File.delete eye_file
     end
 
     def self.installed_in(path)
@@ -47,7 +52,6 @@ module Gears
     def self.generate_reverse_proxy(install_path)
       services_path = parent_path_of install_path
       context = {
-        proxy_file: proxy_file,
         services: installed_in(services_path),
         first_port: first_port
       }
@@ -63,6 +67,7 @@ module Gears
         services: installed_in(services_path),
         services_path: File.expand_path(services_path),
         service_hub_bin: File.expand_path(service_hub_path),
+        proxy_file: proxy_file,
         first_port: first_port
       }
       input = File.read "#{__dir__}/templates/sweatshop_gears.eye.eruby"

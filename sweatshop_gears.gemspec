@@ -22,6 +22,8 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'terminal-announce'
   gem.add_runtime_dependency 'git'
   gem.add_runtime_dependency 'erubis'
+  gem.add_runtime_dependency 'sinatra'
+  gem.add_runtime_dependency 'rack-reverse-proxy'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'riot'
