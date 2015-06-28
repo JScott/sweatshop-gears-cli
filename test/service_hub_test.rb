@@ -12,6 +12,6 @@ context 'sweatshop-gears-hub' do
   context 'the frontpage' do
     setup { HTTP.get('http://localhost:34871').to_s }
     denies_topic.empty
-    # asserts('running services are linked to') { ??? }
+    # asserts('running services are linked to') {  }
   end
 end

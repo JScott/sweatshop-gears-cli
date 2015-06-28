@@ -4,6 +4,8 @@ require 'robot_sweatshop/config'
 require 'robot_sweatshop/gears/service_hub'
 require 'sinatra'
 
+helpers Gears::ServiceHub
+
 configure do
   set :port, ARGV[0] || 34871
   set :bind, configatron.http_bind
