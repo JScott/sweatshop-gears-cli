@@ -15,7 +15,6 @@ end
 
 get '/' do
   services = Gears::Services.installed_in "#{settings.services_path}"
-  p services
   eruby = Erubis::Eruby.new frontpage_template
   context = {services: services}
   eruby.result context
