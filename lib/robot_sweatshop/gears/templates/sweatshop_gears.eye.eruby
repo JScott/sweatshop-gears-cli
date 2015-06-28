@@ -1,0 +1,31 @@
+CONFIG = <%= config %>
+PID_PATH = CONFIG[:pidfile_path]
+LOG_PATH = CONFIG[:logfile_path]
+
+Eye.config do
+  logger "#{CONFIG[:logfile_path]}/eye.log"
+end
+
+Eye.application :sweatshop_gears do
+  trigger :flapping, times: 10, within: 1.minute, retry_in: 10.minutes
+  check :cpu, every: 10.seconds, below: 100, times: 3
+  working_dir CONFIG[:working_path]
+
+  process :service_hub do
+    pid_file "#{PID_PATH}/gears/service_hub.pid"
+    stdall "#{LOG_PATH}/gears/service_hub.log"
+    start_command "<%= service_hub_bin %> '<%= services_path %>'"
+    daemonize true
+  end
+
+  group 'services' do
+    <% for service in services %>
+    process :'<%= service %>' do
+      pid_file "#{PID_PATH}/gears/<%= service %>.pid"
+      stdall "#{LOG_PATH}/gears/<%= service %>.log"
+      start_command "<%= services_path %>/<%= service %>/<%= service %>"
+      daemonize true
+    end
+    <% end %>
+  end
+end

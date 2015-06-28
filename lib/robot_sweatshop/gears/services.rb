@@ -40,7 +40,7 @@ module Gears
         services_path: File.expand_path(services_path),
         service_hub_bin: File.expand_path(service_hub_path)
       }
-      input = File.read "#{__dir__}/sweatshop_gears.eye.eruby"
+      input = File.read "#{__dir__}/templates/sweatshop_gears.eye.eruby"
       eruby = Erubis::Eruby.new input
       write_and_load eruby.result(context)
     end

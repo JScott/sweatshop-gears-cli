@@ -2,7 +2,7 @@
 module Gears
   module ServiceHub
     def frontpage_template
-      File.read "#{__dir__}/templates/frontpage.html.erb"
+      File.read "#{__dir__}/templates/frontpage.html.eruby"
     end
   end
 end

@@ -5,6 +5,7 @@ require 'robot_sweatshop/gears/service_hub'
 require 'robot_sweatshop/gears/services'
 require 'sinatra'
 
+STDOUT.sync = true
 helpers Gears::ServiceHub
 
 configure do
