@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
-require 'robot_sweatshop/config'
-require 'sweatshop_gears/service_hub'
-require 'sinatra'
-require 'sinatra/servicehub'
 require 'erubis'
+require 'robot_sweatshop/config'
+require 'robot_sweatshop/gears/service_hub'
+require 'sinatra'
 
 configure do
   set :port, ARGV[0] || 34871

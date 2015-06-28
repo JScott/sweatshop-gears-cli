@@ -1,12 +1,8 @@
-require 'sinatra/base'
-
-module Sinatra
-  # Sinatra helper for the Service Hub server
+# Helper methods for the Service Hub Sinatra server
+module Gears
   module ServiceHub
-    def self.frontpage_template
+    def frontpage_template
       File.read "#{__dir__}/templates/frontpage.html.erb"
     end
-
-    helpers ServiceHub
   end
 end

@@ -15,8 +15,8 @@ module Gears
       eye_file = '/tmp/.sweatshop_gears.eye'
       File.write eye_file, eye_config
       puts `eye load #{eye_file}`
-      puts `eye stop sweatshop_gears`
-      File.delete eye_file
+      puts `eye stop sweatshop_gears:services`
+      # File.delete eye_file
     end
 
     def self.services_installed_to(install_path)
@@ -28,11 +28,16 @@ module Gears
       File.expand_path "#{install_path}/.."
     end
 
+    def self.service_hub_path
+      "#{__dir__}/../../../bin/sweatshop-gears-service-hub"
+    end
+
     def self.dynamically_load_eye(install_path)
       context = {
         config: Gears::Metadata.sweatshop_config,
         services: services_installed_to(parent_path_of(install_path)),
-        install_path: File.expand_path(install_path)
+        install_path: File.expand_path(install_path),
+        service_hub_bin: File.expand_path(service_hub_path)
       }
       input = File.read "#{__dir__}/sweatshop_gears.eye.eruby"
       eruby = Erubis::Eruby.new input
