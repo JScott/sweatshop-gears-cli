@@ -17,7 +17,6 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'bundler'
   gem.add_runtime_dependency 'commander'
-  gem.add_runtime_dependency 'robot_sweatshop'
   gem.add_runtime_dependency 'contracts'
   gem.add_runtime_dependency 'terminal-announce'
   gem.add_runtime_dependency 'git'
