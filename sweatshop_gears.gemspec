@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name        = 'sweatshop_gears'
-  gem.version     = '1.0.4'
+  gem.version     = '1.0.5'
   gem.licenses    = 'MIT'
   gem.authors     = ['Justin Scott']
   gem.email       = 'jvscott@gmail.com'
